@@ -1,8 +1,19 @@
+BUILD = assets
 ASSETS = ibd-imputation
 
 all: $(ASSETS)
 
-$(ASSETS):
-	$(MAKE) -C $@
+clean:
+	for target in $(ASSETS); do \
+	  $(MAKE) -C $${target} $@; \
+	done
+	rm -rf $(BUILD)
 
-.PHONY: all $(ASSETS)
+$(ASSETS): $(BUILD)
+	$(MAKE) -C $@
+	ln $@/$@.deb $(BUILD)/
+
+$(BUILD):
+	mkdir $@
+
+.PHONY: all clean $(ASSETS)
