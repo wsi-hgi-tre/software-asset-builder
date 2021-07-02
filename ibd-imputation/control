@@ -1,0 +1,8 @@
+Package: ibd-imputation
+Version: 20210702-hgi
+Section: custom
+Priority: optional
+Architecture: amd64
+Maintainer: hgi@sanger.ac.uk
+Description: ibd-imputation
+Depends: zlib1g-dev
