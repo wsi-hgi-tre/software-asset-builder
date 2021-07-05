@@ -1,5 +1,5 @@
 Package: ibd-imputation
-Version: 0~hgi
+Version: 20210705~hgi
 Section: custom
 Priority: optional
 Architecture: amd64
