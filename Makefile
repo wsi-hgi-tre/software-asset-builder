@@ -11,7 +11,7 @@ clean:
 
 $(ASSETS): $(BUILD)
 	$(MAKE) -C $@
-	ln $@/$@.deb $(BUILD)/
+	ln -f $@/$@.deb $(BUILD)/
 
 $(BUILD):
 	mkdir $@
