@@ -1,19 +1,19 @@
-BUILD = assets
-ASSETS = ibd-imputation
+BUILD  = assets
+ASSETS = $(shell find . -depth 2 -name Makefile | cut -d/ -f2)
 
 all: $(ASSETS)
 
-clean:
-	for target in $(ASSETS); do \
-	  $(MAKE) -C $${target} $@; \
-	done
+clean: $(ASSETS:%=clean-%)
 	rm -rf $(BUILD)
 
-$(ASSETS): $(BUILD)
+clean-%:
+	$(MAKE) -C $* clean
+
+$(ASSETS): | $(BUILD)
 	$(MAKE) -C $@
 	ln -f $@/$@.deb $(BUILD)/
 
 $(BUILD):
-	mkdir $@
+	mkdir -p $@
 
-.PHONY: all clean $(ASSETS)
+.PHONY: all clean clean-% $(ASSETS)
