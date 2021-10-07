@@ -1,5 +1,5 @@
 BUILD  = assets
-ASSETS = $(shell find . -depth 2 -name Makefile | cut -d/ -f2)
+ASSETS = $(shell find . -mindepth 2 -maxdepth 2 -name Makefile | cut -d/ -f2)
 
 all: $(ASSETS)
 
