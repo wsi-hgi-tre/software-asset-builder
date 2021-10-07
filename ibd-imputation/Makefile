@@ -4,7 +4,7 @@ DEB = $(IMG).deb
 
 all: $(DEB)
 
-$(DEB): Dockerfile control $(SRC)
+$(DEB): Dockerfile control hgi.patch $(SRC)
 	docker build -t $(IMG) .
 	CONTAINER="$$(docker create $(IMG))"; \
 	docker cp "$${CONTAINER}:/working/$@" .; \

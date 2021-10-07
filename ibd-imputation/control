@@ -1,8 +1,7 @@
 Package: ibd-imputation
-Version: 20210705~hgi
+Version: 20211007~hgi
 Section: custom
 Priority: optional
 Architecture: amd64
 Maintainer: hgi@sanger.ac.uk
 Description: ibd-imputation
-Depends: libstdc++6 (>= 9.1.0), zlib1g

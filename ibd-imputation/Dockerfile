@@ -1,23 +1,29 @@
-FROM debian:buster
+FROM debian:bullseye
 
-RUN printf "deb http://deb.debian.org/debian %s main\n" \
-      "buster-backports" \
-      "testing" \
-      >> /etc/apt/sources.list \
- && apt update \
+RUN apt update \
  && apt install -y \
       build-essential \
-      cmake/buster-backports \
-      zlib1g-dev
+      cmake \
+      curl
 
-# Compile code and build package
-ADD IBD_Imputation.tar.gz control /working
+# Download and build zlib (so we have a static lib)
+RUN curl http://zlib.net/zlib-1.2.11.tar.gz | tar xz \
+ && cd /zlib-1.2.11 \
+ && ./configure \
+ && make \
+ && make install
+
+# Patch and compile code, then build package
+ADD IBD_Imputation.tar.gz hgi.patch control /working/
 RUN cd /working \
  && mkdir -p build \
              ibd-imputation/DEBIAN \
              ibd-imputation/usr/bin \
+ && patch -ruN -p1 -d IBD_Imputation < hgi.patch \
  && cd build \
- && cmake ../IBD_Imputation/Code \
+ && cmake -DCMAKE_EXE_LINKER_FLAGS="-static" \
+          -DCMAKE_BUILD_TYPE=MinSizeRel \
+          ../IBD_Imputation/Code \
  && make \
  && cd .. \
  && mv control ibd-imputation/DEBIAN \

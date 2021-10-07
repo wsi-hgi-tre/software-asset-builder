@@ -1,0 +1,22 @@
+diff -ruN original/Code/exe/ibd_imputation.cpp latest/Code/exe/ibd_imputation.cpp
+--- original/Code/exe/ibd_imputation.cpp	2021-06-23 10:21:00.000000000 +0100
++++ latest/Code/exe/ibd_imputation.cpp	2021-06-30 15:16:25.000000000 +0100
+@@ -16,6 +16,7 @@
+ #include <cstdlib>
+ #include <zlib.h>
+ #include <array>
++#include <cassert>
+ #include "Util.hpp"
+ 
+ using std::cout;
+diff -ruN original/Code/src/CMakeLists.txt latest/Code/src/CMakeLists.txt
+--- original/Code/src/CMakeLists.txt	2020-12-01 19:31:20.000000000 +0000
++++ latest/Code/src/CMakeLists.txt	2021-10-07 17:03:20.000000000 +0100
+@@ -4,6 +4,7 @@
+ #find_package(Eigen3 CONFIG REQUIRED)
+ #message(STATUS "Found Eigen3 ${Eigen3_VERSION}")
+ 
++SET(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+ find_package(ZLIB REQUIRED)
+ message(STATUS "Found zlib ${ZLIB_VERSION_STRING}")
+ 
